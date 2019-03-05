@@ -1,3 +1,5 @@
+import React from 'react';
+
 const HelpPage = () => (
     <div>
         <p>This is the help page.</p>
