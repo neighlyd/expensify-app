@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link, NavLink, Switch } from 'react-rou
 
 import AddExpensePage from '../components/AddExpense';
 import EditExpensePage from '../components/EditExpense';
-import ExpenseDashboardPage from '../components/Dashboard';
+import ExpenseDashboardPage from '../components/ExpenseDashboard';
 import Header from '../components/Header';
 import HelpPage from '../components/Help';
 import NotFoundPage from '../components/NotFound';
