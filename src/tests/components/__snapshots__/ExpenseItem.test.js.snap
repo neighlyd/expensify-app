@@ -12,7 +12,7 @@ exports[`should render expense item 1`] = `
   </Link>
   <p>
     $1.95
-    -
+     - 
     Dec 31st, 1969
   </p>
   <hr />
