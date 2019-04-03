@@ -12,10 +12,6 @@ import './firebase/firebase'
 
 const store = configureStore();
 
-store.dispatch(addExpense({description: 'coffee bill', amount: 50000000, createdAt: 10000}));
-store.dispatch(addExpense({description: 'gas bill', amount: 65732, createdAt: -10000}));
-store.dispatch(addExpense({description: 'rent', amount: 2, createdAt: 55555}));
-
 const state = store.getState();
 
 const jsx = (
