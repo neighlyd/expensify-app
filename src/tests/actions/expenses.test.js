@@ -2,7 +2,16 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import database from '../../firebase/firebase'
 
-import { startAddExpense, addExpense, removeExpense, editExpense, setExpenses, startSetExpenses } from '../../actions/expenses';
+import { 
+    startAddExpense, 
+    addExpense, 
+    removeExpense, 
+    editExpense, 
+    setExpenses, 
+    startSetExpenses, 
+    startRemoveExpense, 
+    startEditExpense
+} from '../../actions/expenses';
 import expenses from '../fixtures/expenses';
 
 const createMockStore = configureMockStore([thunk])
@@ -24,6 +33,22 @@ test('should setup remove expense action object', () => {
     });
 });
 
+
+test('should remove expense from firebase', async () => {
+    const store = createMockStore({})
+    const id = expenses[0].id
+    await store.dispatch(startRemoveExpense({id}))
+    const actions = store.getActions()
+
+    expect(actions[0]).toEqual({
+        type: 'REMOVE_EXPENSE',
+        id
+    })
+
+    const snapshot = await database.ref('expenses').child(id).once('value')
+    expect(snapshot.val()).toBeFalsy()
+})
+
 test('should setup edit expense action object', () => {
     const action = editExpense('123abc', {description: 'Test'});
     expect(action).toEqual({
@@ -34,6 +59,27 @@ test('should setup edit expense action object', () => {
         }
     });
 });
+
+test('should edit expense in firebase', async () => {
+    const store = createMockStore({})
+    const id = expenses[0].id
+    const updates = {
+        description: 'Updated Description',
+        note: 'Updated Note'
+    }
+
+    await store.dispatch(startEditExpense(id, updates))
+    const actions = store.getActions()
+
+    expect(actions[0]).toEqual({
+        type: 'EDIT_EXPENSE',
+        id,
+        updates
+    })
+    const snapshot = await database.ref('expenses').child(id).once('value')
+    expect(snapshot.val().description).toBe(updates.description)
+    expect(snapshot.val().amount).toBe(expenses[0].amount)
+})
 
 test('should setup add expense action object with provided values', () => {
     const action = addExpense(expenses[2]);
