@@ -4,6 +4,10 @@
   "main": "index.js",
   "author": "Dustin Neighly <neighlyd@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": "11.9.0",
+    "npm": "6.9.0"
+  },
   "scripts": {
     "start": "node server/server.js",
     "build:dev": "webpack",
