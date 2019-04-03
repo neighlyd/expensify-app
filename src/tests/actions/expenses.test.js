@@ -7,6 +7,15 @@ import expenses from '../fixtures/expenses';
 
 const createMockStore = configureMockStore([thunk])
 
+beforeEach(async () => {
+    const expensesData = {}
+    expenses.forEach(({ id, description, note, amount, createdAt }) => {
+        expensesData[id] = { description, note, amount, createdAt }
+    })
+    await database.ref('expenses').set(expensesData)
+})
+
+
 test('should setup remove expense action object', () => {
     const action = removeExpense({ id: '123abc' });
     expect(action).toEqual({
