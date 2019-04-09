@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 // import { firebase, googleAuthProvider } from '../firebase/firebase'
 import { startLogout } from '../actions/auth'
 
-const Header = ({ startLogout }) => (
+export const Header = ({ startLogout }) => (
     <header>
         <h1>Expensify</h1>
             <NavLink exact to="/" activeClassName="is-active">Dashboard</NavLink>
