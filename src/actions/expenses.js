@@ -1,4 +1,3 @@
-import uuid from 'uuid';
 import database from '../firebase/firebase'
 
 // component calls action generator
@@ -86,6 +85,4 @@ export const startSetExpenses = () => {
             dispatch(setExpenses(expenses))
         })
     }
-
-
 }

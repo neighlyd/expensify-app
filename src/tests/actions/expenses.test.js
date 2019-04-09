@@ -77,6 +77,7 @@ test('should edit expense in firebase', async () => {
         updates
     })
     const snapshot = await database.ref('expenses').child(id).once('value')
+    // Changed what we wanted, didn't change what we didn't want.
     expect(snapshot.val().description).toBe(updates.description)
     expect(snapshot.val().amount).toBe(expenses[0].amount)
 })

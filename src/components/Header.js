@@ -1,13 +1,25 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from 'react'
+import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+// import { firebase, googleAuthProvider } from '../firebase/firebase'
+import { startLogout } from '../actions/auth'
 
-const Header = () => (
+const Header = ({ startLogout }) => (
     <header>
         <h1>Expensify</h1>
             <NavLink exact to="/" activeClassName="is-active">Dashboard</NavLink>
             <NavLink to="/create" activeClassName="is-active">Create Expense</NavLink>
             <NavLink to="/help" activeClassName="is-active">Help</NavLink>        
+            <button onClick={ startLogout }>Logout</button>
     </header>
-);
+)
+    
+// const startLogout = () => {
+//     firebase.auth().signOut()
+// }
 
-export default Header;
+const mapDispatchToProps = (dispatch) => ({
+    startLogout: () => dispatch(startLogout)
+})
+
+export default connect(undefined, mapDispatchToProps)(Header);
